@@ -229,12 +229,12 @@ void motion_log(int level, unsigned int type, int errno_flag,int fncname, const 
     /*
      * Prefix the message with the thread number and name,
      * log level string, log type string, and time.
-     * e.g. [1:enc] [ERR] [ALL] [Apr 03 00:08:44] blah
+     * e.g. [Apr 03 00:08:44] [ERR] [ALL] [1:enc] blah
      */
     if (log_mode == LOGMODE_FILE) {
-        n = snprintf(buf, sizeof(buf), "[%d:%s] [%s] [%s] [%s] ",
-                     threadnr, threadname, get_log_level_str(level), get_log_type_str(type),
-                     str_time());
+        n = snprintf(buf, sizeof(buf), "[%s] [%s] [%s] [%d:%s] ",
+                     str_time(), get_log_level_str(level), get_log_type_str(type),
+                     threadnr, threadname);
     } else {
     /*
      * Prefix the message with the thread number and name,
